@@ -2,4 +2,4 @@
 
 - [安装Ubuntu虚拟机](https://github.com/zhenggenwang/StepByStepInstallEOS/blob/master/Install%20Ubuntu.md)
 - [下载并安装EOS](https://github.com/zhenggenwang/StepByStepInstallEOS/blob/master/Install%20EOS.md)
-- [部署](https://github.com/zhenggenwang/StepByStepInstallEOS/blob/master/deploy%20EOS.md)
+- [部署EOS](https://github.com/zhenggenwang/StepByStepInstallEOS/blob/master/deploy%20EOS.md)
