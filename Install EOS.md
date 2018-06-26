@@ -7,8 +7,7 @@
 网上有大把教程，随便找一个照着装就行了
 
 ## 进入虚拟机并安装VMWARE TOOLS：
-sudo ./vmware-install.pl –d
-若无法安装请点击这里；
+    sudo ./vmware-install.pl –d
 
 ## 打开终端，安装GIT：
     sudo apt install git
@@ -16,7 +15,6 @@ sudo ./vmware-install.pl –d
 ## 下载EOS源代码：
     git clone https://github.com/eosio/eos --recursive
 在下载之前一定要设置代理服务器，要不然速度很慢，而且下载时容易漏文件，就会导致后续一大堆的安装问题；
-点击此处设置代理；
 
 ## 安装EOSIO：
     cd eos
@@ -71,9 +69,7 @@ plugin = eosio::http_plugin
 plugin = eosio::history_api_plugin·
 ```
 
-保存后再次执行（./nodeos --config-dir data-dir/），出现以下信息即可：
- 
-
+保存后再次执行（./nodeos --config-dir data-dir/）
 此时屏幕会不停的滚动，系统开始创建区块。做到这里，eos本地环境部署就已经成功了，开始你的EOS之旅吧；
 
  
@@ -83,9 +79,10 @@ plugin = eosio::history_api_plugin·
 可以设置代理通道，设置后下载速度可达到200K/S；
 授人以鱼(解决方案)：
 ubuntu修改/etc/hosts(windows下C:\Windows\System32\drivers\etc\HOST)文件添加如下ip隐射：
-192.30.253.113 github.com
+    192.30.253.113 github.com
 授人以渔(解决方法)：
-通过http://tool.chinaz.com/dns/让到对你来说最快的代理服务器，如：我找到的最快的代理是：192.30.253.113，所以在上魔神的配置文件添加以下配置：192.30.253.113 github.com
+通过http://tool.chinaz.com/dns/让到对你来说最快的代理服务器，如：我找到的最快的代理是：192.30.253.113，所以在上魔神的配置文件添加以下配置：     
+    192.30.253.113 github.com
 
 ## 安装VMWARE TOOLS时可能出现的问题：
 输入sudo ./vmware-install.pl –d命令时出现无法安装的问题，那就把“-d”去掉，只输入sudo ./vmware-install.pl命令，然后按提示一步一步来来吧，别偷懒了，“-d”参数是按默认设置安装；
