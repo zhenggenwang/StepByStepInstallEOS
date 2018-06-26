@@ -81,7 +81,8 @@ plugin = eosio::history_api_plugin·
 ubuntu修改/etc/hosts(windows下C:\Windows\System32\drivers\etc\HOST)文件添加如下ip隐射：
     192.30.253.113 github.com
 授人以渔(解决方法)：
-通过http://tool.chinaz.com/dns/让到对你来说最快的代理服务器，如：我找到的最快的代理是：192.30.253.113，所以在上魔神的配置文件添加以下配置：     
+通过http://tool.chinaz.com/dns/让到对你来说最快的代理服务器，如：我找到的最快的代理是：192.30.253.113，所以在上魔神的配置文件添加以下配置： 
+
     192.30.253.113 github.com
 
 ## 安装VMWARE TOOLS时可能出现的问题：
