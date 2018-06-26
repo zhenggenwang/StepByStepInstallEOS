@@ -11,30 +11,31 @@ sudo ./vmware-install.pl –d
 若无法安装请点击这里；
 
 ## 打开终端，安装GIT：
-sudo apt install git
+    sudo apt install git
 
 ## 下载EOS源代码：
-git clone https://github.com/eosio/eos --recursive
+    git clone https://github.com/eosio/eos --recursive
 在下载之前一定要设置代理服务器，要不然速度很慢，而且下载时容易漏文件，就会导致后续一大堆的安装问题；
 点击此处设置代理；
 
 ## 安装EOSIO：
-cd eos
-./eosio_build.sh 
+    cd eos
+    ./eosio_build.sh 
 
 ## 安装可执行文件
 生成全局命令，写入/usr/local
-cd build
-sudo make install
+    cd build
+    sudo make install
 
 ## 搭建本地EOS运行环境：
-cd eos/build/programs/nodeos
-./nodeos --config-dir data-dir/ --replay-blockchain 
+    cd eos/build/programs/nodeos
+    ./nodeos --config-dir data-dir/ --replay-blockchain 
 注：执行了该命令后，会像官方文档所提示的那样报出一个错误，有错误是正确的，没有报错才要慌，这个错误是为了让你修改它的配置文件config.ini。此时查看nodeos，可以发现多了一个名为data-dir的文件夹，打开这个文件下可以看到一个config.ini的配置文件，这时我们用vi编辑器来修改这个文件，这个文件里有很多东西，你可以全部删除，也可以就在里面修改，我的建议是全部删除，方便省事。在这个文件夹下添加如下内容（genesis-json文件的地址一定要写正确）：
 
+```
 # Load the testnet genesis state, which creates some initial block producers with the default key
 genesis-json = /home/wangwang/eos/tutorials/bios-boot-tutorial/genesis.json
- # Enable production on a stale chain, since a single-node test chain is pretty much always stale
+# Enable production on a stale chain, since a single-node test chain is pretty much always stale
 enable-stale-production = true
 # Enable block production with the testnet producers
 producer-name = inita
@@ -67,7 +68,8 @@ plugin = eosio::wallet_api_plugin
 plugin = eosio::chain_api_plugin
 plugin = eosio::http_plugin
 # This will be used by the validation step below, to view account history
-plugin = eosio::history_api_plugin
+plugin = eosio::history_api_plugin·
+```
 
 保存后再次执行（./nodeos --config-dir data-dir/），出现以下信息即可：
  
@@ -97,35 +99,39 @@ ubuntu修改/etc/hosts(windows下C:\Windows\System32\drivers\etc\HOST)文件添�
 解决方法：把eosio_build.sh和eosio_build_ubuntu.sh脚本内的make -j"${JOBS}"全部改为make -j$( nproc )
 
 ## 访问共享文件夹（VMSHAREDFILES）：
-cd /mnt/hgfs/VMSharedFiles
+    cd /mnt/hgfs/VMSharedFiles
 把目录A下的所有文件拷贝到目录B
-cp -r eos /  /home/wangwang/eos/
+    cp -r eos /  /home/wangwang/eos/
 
 ## 从WINDOWS拷贝文件到UBUNTUN时需要注意的事：
 从windows拷贝eos到Ubuntu时，运行eosio_build.sh会出现找不到文件或者目录的错误，解决方法如下：
 原因是windows会自动在文件中添加一些字符，删除就可以了，
-sed -i 's/\r$//' eosio_build.sh
-sed -i 's/\r$//' eosio_build_ubuntu.sh
+    sed -i 's/\r$//' eosio_build.sh
+    sed -i 's/\r$//' eosio_build_ubuntu.sh
 
 ## NODES 启动报错:
 需要把account_history_api_plugin 替换成history_api_plugin
 如果以下错误:
+```
 feng/work/eos/libraries/chainbase/src/chainbase.cpp(106): Throw in function chainbase::database::database(const bfs::path &, chainbase::database::open_flags, uint64_t)
 Dynamic exception type: boost::exception_detail::clone_impl<boost::exception_detail::error_info_injector<std::runtime_error> >
 std::exception::what: database dirty flag set (likely due to unclean shutdown) replay or resync required
+```
 
 ### 需要在nodes的时候添加:
---replay-blockchain
+    --replay-blockchain
 //or
---resync-blockchain
+    --resync-blockchain
 
 ## EOS源码构建：
 注意： 这里笔者按照官方的代码运行出错了，真正有用的代码我写出来，其实就是两个路径的改变
+```
 cd ~
 git clone https://github.com/eosio/eos --recursive
 mkdir -p ~/eos/build && cd ~/eos/build
 cmake -DBINARYEN_BIN=~/binaryen/bin -DWASM_ROOT=~/wasm-compiler/llvm -DOPENSSL_ROOT_DIR=/usr/include/openssl -DOPENSSL_LIBRARIES=/usr/include/openssl ..
 make -j$( nproc )
+```
 
 ## NEDEOS节点服务无法开启：
 删除日志文件：rm -rf ~/.local/share/eosio/nodeos/data
@@ -141,9 +147,10 @@ make -j$( nproc )
 如果装了桌面日历软件，那就关掉，它会跟Vmware虚拟机冲突。
 
 ## 更新EOS源码：
+```
 cd eos
 git submodule update --init –recursive
-
+```
 
 
 
